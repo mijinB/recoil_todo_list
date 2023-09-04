@@ -5,43 +5,30 @@ function ToDo({ id, text, category }: IToDo) {
     const setToDos = useSetRecoilState(toDoState);
 
     /**@function onClick
-     * 1. MouseEvent를 인자로 받아서 수정할 category를 변수(name)에 대입
+     * 1. 수정할 categoryState를 인자로 받음
      * 2. category를 수정하고자 하는 toDo의 index 찾아서 변수(targetIndex)에 대입
-     * 3. targetIndex의 index 값을 사용해서 수정하고자 하는 toDo의 object를 변수(oldToDo)에 대입
-     * 4. 컴포넌트 props로 받은 id, text는 그 값을 유지하고 category는 수정될 값(name)으로 변수(newToDo)에 대입
+     * 3. 컴포넌트 props로 받은 id, text는 그 값을 유지하고 category는 수정될 값(categoryState)으로 변수(newToDo)에 대입
+     * 4. 원래의 toDos List 값들을 그대로 새로운 List 변수(newToDos)에 대입
+     * 5. newToDos ⇒ splice 사용해서 targetIndex 위치의 1개의 요소를 newToDo 값으로 교체
+     * 6. 수정된 newToDos로 ToDos List 변경(setToDos)
      */
-    const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const {
-            currentTarget: { name },
-        } = event;
+    const onClick = (categoryState: IToDo["category"]) => {
+        setToDos((prevTodos) => {
+            const targetIndex = prevTodos.findIndex((toDo) => toDo.id === id);
+            const newToDo: IToDo = { id, text, category: categoryState };
+            const newToDos = [...prevTodos];
 
-        setToDos((oldToDos) => {
-            const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
-            const oldToDo = oldToDos[targetIndex];
-            const newToDo = { id, text, category: name };
-            console.log(oldToDo, newToDo);
-            return oldToDos;
+            newToDos.splice(targetIndex, 1, newToDo);
+            return newToDos;
         });
     };
 
     return (
         <li>
             <span>{text}</span>
-            {category !== "TO_DO" && (
-                <button name="TO_DO" onClick={onClick}>
-                    To Do
-                </button>
-            )}
-            {category !== "DOING" && (
-                <button name="DOING" onClick={onClick}>
-                    Doing
-                </button>
-            )}
-            {category !== "DONE" && (
-                <button name="DONE" onClick={onClick}>
-                    Done
-                </button>
-            )}
+            {category !== "TO_DO" && <button onClick={() => onClick("TO_DO")}>To Do</button>}
+            {category !== "DOING" && <button onClick={() => onClick("DOING")}>Doing</button>}
+            {category !== "DONE" && <button onClick={() => onClick("DONE")}>Done</button>}
         </li>
     );
 }

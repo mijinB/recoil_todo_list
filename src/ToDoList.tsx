@@ -69,7 +69,8 @@ function ToDoList() {
     });
 
     /**@function onValid
-     * 1. submit의 data를 받아 출력
+     * 1. password와 password1의 값이 동일하지 않으면 error 발생시키고 포커스 주기
+     * (2. 주석_만약, 서버에 문제가 생긴다면 발생시킬 error)
      */
     const onValid = (data: IForm) => {
         if (data.password !== data.password1) {

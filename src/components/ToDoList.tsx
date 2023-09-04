@@ -11,7 +11,7 @@ function ToDoList() {
      * 1. <select>에서 선택한 category로 categoryState(atom) 값 변경
      */
     const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
-        setCategory(event.currentTarget.value);
+        setCategory(event.currentTarget.value as any);
     };
 
     return (

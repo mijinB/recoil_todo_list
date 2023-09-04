@@ -13,14 +13,18 @@ function ToDo({ id, text, category }: IToDo) {
      * 6. 수정된 newToDos로 ToDos List 변경(setToDos)
      */
     const onClick = (categoryState: IToDo["category"]) => {
-        setToDos((prevTodos) => {
-            const targetIndex = prevTodos.findIndex((toDo) => toDo.id === id);
+        setToDos((prevToDos) => {
+            const targetIndex = prevToDos.findIndex((toDo) => toDo.id === id);
             const newToDo: IToDo = { id, text, category: categoryState };
-            const newToDos = [...prevTodos];
+            const newToDos = [...prevToDos];
 
             newToDos.splice(targetIndex, 1, newToDo);
             return newToDos;
         });
+    };
+
+    const onDelete = () => {
+        setToDos((prevToDos) => prevToDos.filter((toDo) => toDo.id !== id));
     };
 
     return (
@@ -29,6 +33,7 @@ function ToDo({ id, text, category }: IToDo) {
             {category !== Categories.TO_DO && <button onClick={() => onClick(Categories.TO_DO)}>To Do</button>}
             {category !== Categories.DOING && <button onClick={() => onClick(Categories.DOING)}>Doing</button>}
             {category !== Categories.DONE && <button onClick={() => onClick(Categories.DONE)}>Done</button>}
+            <button onClick={onDelete}>✖</button>
         </li>
     );
 }

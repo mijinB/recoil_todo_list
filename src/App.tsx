@@ -83,8 +83,6 @@ function App() {
         localStorage.setItem("isdarkmode", `${!isDark}`);
     };
 
-    console.log(isDark);
-
     return (
         <>
             <ThemeProvider theme={isDark ? darkTheme : lightTheme}>

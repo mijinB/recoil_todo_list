@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { categoriesState, categoryState } from "../atoms";
+import { categoriesState, categoryState, toDoState } from "../atoms";
 import { useEffect } from "react";
 import { styled } from "styled-components";
 
@@ -48,6 +48,7 @@ const CategoryAddButton = styled.button`
 function SelectCategory() {
     const [categories, setCategories] = useRecoilState(categoriesState);
     const [category, setCategory] = useRecoilState(categoryState);
+    const [toDos, setToDos] = useRecoilState(toDoState);
 
     /**@function showCategoryContent
      * 1. 클릭한 <button> category로 categoryState(atom) 값 변경해서 카테고리 이동
@@ -77,21 +78,53 @@ function SelectCategory() {
         }
     };
 
+    /**@function onDelete
+     * 1. confirm 창으로 category를 정말 삭제할 건지 확인 후 아래 기능 수행, 취소를 누르면 아무것도 하지않음
+     * 2. 삭제하려는 category가 현재 focus인 category라면, "TO_DO" category로 focus 이동
+     * 3. categories List에서 해당 category 삭제
+     * 4. toDos List에서 해당 category인 todo들 모두 삭제
+     */
+    const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const isConfirmedDeletion = window.confirm(
+            "카테고리를 정말 삭제하시겠습니까?\n해당 카테고리에 포함된 data가 모두 삭제됩니다."
+        );
+
+        if (isConfirmedDeletion) {
+            if (event.currentTarget.value === category) {
+                setCategory("TO_DO");
+            }
+
+            setCategories((prevCategories) =>
+                prevCategories.filter((categoriesItem) => categoriesItem !== event.currentTarget.value)
+            );
+            setToDos((prevToDos) => prevToDos.filter((toDo) => toDo.category !== event.currentTarget.value));
+        }
+    };
+
     useEffect(() => {
         localStorage.setItem("categories", JSON.stringify(categories));
     }, [categories]);
 
+    useEffect(() => {
+        localStorage.setItem("toDos", JSON.stringify(toDos));
+    }, [toDos]);
+
     return (
         <>
             {categories.map((categoryItem) => (
-                <CategoryButton
-                    key={categories.indexOf(categoryItem)}
-                    value={categoryItem}
-                    disabled={categoryItem === category}
-                    onClick={showCategoryContent}
-                >
-                    {categoryItem.replace("_", " ")}
-                </CategoryButton>
+                <>
+                    <CategoryButton
+                        key={categories.indexOf(categoryItem)}
+                        value={categoryItem}
+                        disabled={categoryItem === category}
+                        onClick={showCategoryContent}
+                    >
+                        {categoryItem.replace("_", " ")}
+                    </CategoryButton>
+                    <button key={categories.indexOf(categoryItem) + "xx"} value={categoryItem} onClick={onDelete}>
+                        X
+                    </button>
+                </>
             ))}
             <CategoryAddButton onClick={addCategory}>+Category</CategoryAddButton>
         </>

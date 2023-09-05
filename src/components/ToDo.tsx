@@ -1,10 +1,10 @@
 import { useSetRecoilState } from "recoil";
-import { Categories, IToDo, toDoState } from "../atoms";
+import { IToDo, toDoState } from "../atoms";
 
 function ToDo({ id, text, category }: IToDo) {
     const setToDos = useSetRecoilState(toDoState);
 
-    /**@function onClick
+    /**@function changeCategoryOnClick
      * 1. 수정할 categoryState를 인자로 받음
      * 2. category를 수정하고자 하는 toDo의 index 찾아서 변수(targetIndex)에 대입
      * 3. 컴포넌트 props로 받은 id, text는 그 값을 유지하고 category는 수정될 값(categoryState)으로 변수(newToDo)에 대입
@@ -12,7 +12,7 @@ function ToDo({ id, text, category }: IToDo) {
      * 5. newToDos ⇒ splice 사용해서 targetIndex 위치의 1개의 요소를 newToDo 값으로 교체
      * 6. 수정된 newToDos로 ToDos List 변경(setToDos)
      */
-    const onClick = (categoryState: IToDo["category"]) => {
+    const changeCategoryOnClick = (categoryState: IToDo["category"]) => {
         setToDos((prevToDos) => {
             const targetIndex = prevToDos.findIndex((toDo) => toDo.id === id);
             const newToDo: IToDo = { id, text, category: categoryState };
@@ -30,9 +30,9 @@ function ToDo({ id, text, category }: IToDo) {
     return (
         <li>
             <span>{text}</span>
-            {category !== Categories.TO_DO && <button onClick={() => onClick(Categories.TO_DO)}>To Do</button>}
-            {category !== Categories.DOING && <button onClick={() => onClick(Categories.DOING)}>Doing</button>}
-            {category !== Categories.DONE && <button onClick={() => onClick(Categories.DONE)}>Done</button>}
+            {category !== "TO_DO" && <button onClick={() => changeCategoryOnClick("TO_DO")}>To Do</button>}
+            {category !== "DOING" && <button onClick={() => changeCategoryOnClick("DOING")}>Doing</button>}
+            {category !== "DONE" && <button onClick={() => changeCategoryOnClick("DONE")}>Done</button>}
             <button onClick={onDelete}>✖</button>
         </li>
     );

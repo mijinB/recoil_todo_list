@@ -7,12 +7,12 @@ import { styled } from "styled-components";
 const ToDoForm = styled.form`
     display: flex;
     align-items: center;
+    margin: 35px 0px;
 `;
 
 const ToDoInput = styled.input`
     width: 100%;
     padding: 6px 11px;
-    margin: 15px 10px;
     border: none;
     border-radius: 6px;
     background-color: ${(props) => props.theme.secondBoxColor};
@@ -28,7 +28,6 @@ const ToDoInput = styled.input`
 const AddButton = styled.button`
     height: 33px;
     padding: 4px 11px;
-    margin-right: 10px;
     border: none;
     border-radius: 6px;
     background-color: ${(props) => props.theme.accentTextColor};

@@ -43,6 +43,7 @@ function ToDo({ id, text, category }: IToDo) {
                     )
             )}
             <button onClick={onDelete}>✖</button>
+            <hr />
         </li>
     );
 }

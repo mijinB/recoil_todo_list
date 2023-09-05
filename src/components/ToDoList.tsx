@@ -14,7 +14,7 @@ const Container = styled.div`
 const Header = styled.header`
     display: flex;
     justify-content: center;
-    margin: 100px 0 23px;
+    margin: 90px 0 23px;
 `;
 
 const Title = styled.h1`
@@ -30,6 +30,15 @@ const CategoryWrapper = styled.div`
     margin-bottom: 20px;
 `;
 
+const ToDoWrapper = styled.div`
+    height: 500px;
+    padding: 20px;
+    border: 2px solid ${(props) => props.theme.textColor};
+    border-radius: 10px;
+    background-color: ${(props) => props.theme.boxColor};
+    overflow-y: scroll;
+`;
+
 function ToDoList() {
     const toDos = useRecoilValue(toDoSelector);
 
@@ -41,11 +50,12 @@ function ToDoList() {
             <CategoryWrapper>
                 <SelectCategory />
             </CategoryWrapper>
-            <hr />
             <CreateToDo />
-            {toDos?.map((toDo) => (
-                <ToDo key={toDo.id} {...toDo} />
-            ))}
+            <ToDoWrapper>
+                {toDos?.map((toDo) => (
+                    <ToDo key={toDo.id} {...toDo} />
+                ))}
+            </ToDoWrapper>
         </Container>
     );
 }

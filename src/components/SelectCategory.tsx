@@ -19,7 +19,7 @@ const CategoryButton = styled.button`
     color: ${(props) => props.theme.textColor};
     font-weight: 600;
     overflow-wrap: anywhere;
-    transition: background-color 0.25s ease-out;
+    transition: all 0.25s ease-out;
     cursor: pointer;
     &:hover {
         background-color: ${(props) => props.theme.accentBgColor};

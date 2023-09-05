@@ -35,7 +35,7 @@ const AddButton = styled.button`
     font-size: 14px;
     font-weight: 600;
     line-height: 1.5;
-    transition: background-color 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
     &:hover {
         background-color: ${(props) => props.theme.accentBgColor};

@@ -138,20 +138,15 @@ function SelectCategory() {
     return (
         <>
             {categories.map((categoryItem) => (
-                <CategoryButtonsWrapper>
+                <CategoryButtonsWrapper key={categories.indexOf(categoryItem)}>
                     <CategoryButton
-                        key={categories.indexOf(categoryItem)}
                         value={categoryItem}
                         disabled={categoryItem === category}
                         onClick={showCategoryContent}
                     >
                         {categoryItem.replace("_", " ")}
                     </CategoryButton>
-                    <CategoryDeleteButton
-                        key={categories.indexOf(categoryItem) + "xx"}
-                        value={categoryItem}
-                        onClick={onDelete}
-                    >
+                    <CategoryDeleteButton value={categoryItem} onClick={onDelete}>
                         ✖
                     </CategoryDeleteButton>
                 </CategoryButtonsWrapper>

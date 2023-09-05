@@ -1,8 +1,9 @@
-import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { IToDo, categoriesState, toDoState } from "../atoms";
 
 function ToDo({ id, text, category }: IToDo) {
     const setToDos = useSetRecoilState(toDoState);
+    const categories = useRecoilValue(categoriesState);
 
     /**@function changeCategoryOnClick
      * 1. 수정할 categoryState를 인자로 받음
@@ -30,9 +31,17 @@ function ToDo({ id, text, category }: IToDo) {
     return (
         <li>
             <span>{text}</span>
-            {category !== "TO_DO" && <button onClick={() => changeCategoryOnClick("TO_DO")}>To Do</button>}
-            {category !== "DOING" && <button onClick={() => changeCategoryOnClick("DOING")}>Doing</button>}
-            {category !== "DONE" && <button onClick={() => changeCategoryOnClick("DONE")}>Done</button>}
+            {categories.map(
+                (categoriesItem) =>
+                    category !== categoriesItem && (
+                        <button
+                            key={categories.indexOf(categoriesItem)}
+                            onClick={() => changeCategoryOnClick(categoriesItem)}
+                        >
+                            {categoriesItem.replace("_", " ")}
+                        </button>
+                    )
+            )}
             <button onClick={onDelete}>✖</button>
         </li>
     );

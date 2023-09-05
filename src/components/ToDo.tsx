@@ -6,8 +6,7 @@ const ToDoItemWrapper = styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 75px;
-    margin: 15px 0;
+    margin: 15px 0 20px;
 `;
 
 const ToDoItemText = styled.span`
@@ -38,9 +37,13 @@ const ToDoItemDelete = styled.button`
 const ToDoItemCategoryWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-content: space-evenly;
     align-items: baseline;
-    height: 41px;
+    min-height: 55px;
     padding-right: 10px;
+    margin: 15px 10px 0 10px;
+    border-radius: 5px;
+    background-color: ${(props) => props.theme.secondBoxColor};
 `;
 
 const ToDoItemCategory = styled.button`
@@ -53,7 +56,11 @@ const ToDoItemCategory = styled.button`
     color: ${(props) => props.theme.accentTextColor};
     font-size: 12px;
     font-weight: 600;
+    transition: all 0.25s ease-out;
     cursor: pointer;
+    &:hover {
+        color: ${(props) => props.theme.accentBgColor};
+    }
     &::before {
         content: "";
     }
@@ -70,6 +77,8 @@ const ToDoItemCategory = styled.button`
 
 const ToDoItemCategoryText = styled.span`
     width: 60px;
+    height: 15px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 `;

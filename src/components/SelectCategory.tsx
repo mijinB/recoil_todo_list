@@ -3,10 +3,15 @@ import { categoriesState, categoryState, toDoState } from "../atoms";
 import { useEffect } from "react";
 import { styled } from "styled-components";
 
+const CategoryButtonsWrapper = styled.div`
+    position: relative;
+`;
+
 const CategoryButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 45px;
     border: none;
     border-radius: 10px;
@@ -24,6 +29,27 @@ const CategoryButton = styled.button`
         border: 4px solid ${(props) => props.theme.accentTextColor};
         background-color: ${(props) => props.theme.accentBgColor};
         color: ${(props) => props.theme.accentTextColor};
+    }
+`;
+
+const CategoryDeleteButton = styled.button`
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    width: 23px;
+    height: 23px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.bgColor};
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease-out;
+    cursor: pointer;
+    &:hover {
+        background-color: ${(props) => props.theme.accentTextColor};
+        color: red;
     }
 `;
 
@@ -112,7 +138,7 @@ function SelectCategory() {
     return (
         <>
             {categories.map((categoryItem) => (
-                <>
+                <CategoryButtonsWrapper>
                     <CategoryButton
                         key={categories.indexOf(categoryItem)}
                         value={categoryItem}
@@ -121,10 +147,14 @@ function SelectCategory() {
                     >
                         {categoryItem.replace("_", " ")}
                     </CategoryButton>
-                    <button key={categories.indexOf(categoryItem) + "xx"} value={categoryItem} onClick={onDelete}>
-                        X
-                    </button>
-                </>
+                    <CategoryDeleteButton
+                        key={categories.indexOf(categoryItem) + "xx"}
+                        value={categoryItem}
+                        onClick={onDelete}
+                    >
+                        ✖
+                    </CategoryDeleteButton>
+                </CategoryButtonsWrapper>
             ))}
             <CategoryAddButton onClick={addCategory}>+Category</CategoryAddButton>
         </>

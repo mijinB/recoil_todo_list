@@ -25,11 +25,13 @@ const ToDoItemDelete = styled.button`
     border: none;
     border-radius: 50%;
     background-color: ${(props) => props.theme.textColor};
-    font-size: 11px;
+    font-size: 14px;
+    font-weight: 600;
     transition: all 0.25s ease-out;
     cursor: pointer;
     &:hover {
-        background-color: ${(props) => props.theme.accentBgColor};
+        background-color: ${(props) => props.theme.accentTextColor};
+        color: red;
     }
 `;
 
@@ -107,7 +109,7 @@ function ToDo({ id, text, category }: IToDo) {
             <ToDoItemWrapper>
                 <ToDoItemText>
                     {text}
-                    <ToDoItemDelete onClick={onDelete}>❌</ToDoItemDelete>
+                    <ToDoItemDelete onClick={onDelete}>✖</ToDoItemDelete>
                 </ToDoItemText>
                 <ToDoItemCategoryWrapper>
                     {categories.map(

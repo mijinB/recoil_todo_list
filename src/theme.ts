@@ -7,6 +7,8 @@ export const lightTheme: DefaultTheme = {
     accentTextColor: "#f9ca24",
     boxColor: "#ffffff",
     secondBoxColor: "#dfe4ea",
+    contentText: "🌞",
+    contentLeft: "2px",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -16,4 +18,6 @@ export const darkTheme: DefaultTheme = {
     accentTextColor: "#ff9f43",
     boxColor: "rgba(0, 0, 0, 0.5)",
     secondBoxColor: "#535c68",
+    contentText: "⭐",
+    contentLeft: "28px",
 };

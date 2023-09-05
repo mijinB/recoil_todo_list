@@ -1,5 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import TodoList from "./components/ToDoList";
+import { useRecoilState } from "recoil";
+import { isDarkAtom } from "./atoms";
+import ThemeModeButton from "./components/ThemeModeButton";
+import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -67,10 +71,24 @@ li {
 `;
 
 function App() {
+    const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+
+    /**@function toggleDarkAtom
+     * 1. useSetRecoilState 함수를 이용해서 isDarkAtom 값 변경
+     * 2. localStorage에 isDark 값 저장
+     */
+    const toggleDarkAtom = () => {
+        setIsDark((prev) => !prev);
+        localStorage.setItem("isdarkmode", `${!isDark}`);
+    };
+
     return (
         <>
-            <GlobalStyle />
-            <TodoList />
+            <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+                <ThemeModeButton clickEvent={toggleDarkAtom} />
+                <GlobalStyle />
+                <TodoList />
+            </ThemeProvider>
         </>
     );
 }

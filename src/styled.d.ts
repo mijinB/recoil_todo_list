@@ -8,5 +8,7 @@ declare module "styled-components" {
         accentTextColor: string;
         boxColor: string;
         secondBoxColor: string;
+        contentText: string;
+        contentLeft: string;
     }
 }

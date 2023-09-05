@@ -1,5 +1,10 @@
 import { atom, selector } from "recoil";
 
+export const isDarkAtom = atom({
+    key: "isDark",
+    default: localStorage.getItem("isdarkmode") ?? false,
+});
+
 export const initCategories: string[] = ["TO_DO", "DOING", "DONE"];
 
 export interface IToDo {

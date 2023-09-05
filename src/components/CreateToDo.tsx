@@ -28,6 +28,7 @@ const ToDoInput = styled.input`
 const AddButton = styled.button`
     height: 33px;
     padding: 4px 11px;
+    margin-right: 10px;
     border: none;
     border-radius: 6px;
     background-color: ${(props) => props.theme.accentTextColor};

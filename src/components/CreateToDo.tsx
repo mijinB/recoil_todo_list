@@ -57,7 +57,7 @@ function CreateToDo() {
      * 2. input 빈 값으로 초기화
      */
     const handleValid = ({ toDo }: IForm) => {
-        setToDos((oldToDos) => [{ id: Date.now(), text: toDo, category }, ...oldToDos]);
+        setToDos((oldToDos) => [...oldToDos, { id: Date.now(), text: toDo, category }]);
         setValue("toDo", "");
     };
 

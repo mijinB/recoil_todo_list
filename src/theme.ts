@@ -3,10 +3,10 @@ import { DefaultTheme } from "styled-components";
 export const lightTheme: DefaultTheme = {
     bgColor: "#f1f2f6",
     textColor: "#2f3640",
-    accentBgColor: "#dcdde1",
-    accentTextColor: "#feca57",
-    boxColor: "rgba(255, 255, 255, 0.5)",
-    secondBoxColor: "#ff7675",
+    accentBgColor: "#F8EFBA",
+    accentTextColor: "#f9ca24",
+    boxColor: "#ffffff",
+    secondBoxColor: "#dfe4ea",
 };
 
 export const darkTheme: DefaultTheme = {

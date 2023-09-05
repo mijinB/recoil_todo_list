@@ -11,15 +11,34 @@ const ToDoItemWrapper = styled.li`
 `;
 
 const ToDoItemText = styled.span`
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
     color: ${(props) => props.theme.textColor};
     font-size: 18px;
+`;
+
+const ToDoItemDelete = styled.button`
+    width: 23px;
+    height: 23px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.textColor};
+    font-size: 11px;
+    transition: all 0.25s ease-out;
+    cursor: pointer;
+    &:hover {
+        background-color: ${(props) => props.theme.accentBgColor};
+    }
 `;
 
 const ToDoItemCategoryWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    align-items: center;
+    align-items: baseline;
     height: 41px;
+    padding-right: 10px;
 `;
 
 const ToDoItemCategory = styled.button`
@@ -45,6 +64,12 @@ const ToDoItemCategory = styled.button`
     &:last-child::after {
         content: "";
     }
+`;
+
+const Test = styled.span`
+    width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 function ToDo({ id, text, category }: IToDo) {
@@ -79,7 +104,7 @@ function ToDo({ id, text, category }: IToDo) {
             <ToDoItemWrapper>
                 <ToDoItemText>
                     {text}
-                    <button onClick={onDelete}>✖</button>
+                    <ToDoItemDelete onClick={onDelete}>❌</ToDoItemDelete>
                 </ToDoItemText>
                 <ToDoItemCategoryWrapper>
                     {categories.map(
@@ -89,7 +114,7 @@ function ToDo({ id, text, category }: IToDo) {
                                     key={categories.indexOf(categoriesItem)}
                                     onClick={() => changeCategoryOnClick(categoriesItem)}
                                 >
-                                    {categoriesItem.replace("_", " ")}
+                                    <Test>{categoriesItem.replace("_", " ")}</Test>
                                 </ToDoItemCategory>
                             )
                     )}

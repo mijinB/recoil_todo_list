@@ -21,7 +21,7 @@ const ToDoInput = styled.input`
     line-height: 1.5;
     outline: none;
     &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
+        color: ${(props) => props.theme.textColor};
     }
 `;
 

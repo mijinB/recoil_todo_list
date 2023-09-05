@@ -60,6 +60,7 @@ body {
     font-family: 'Source Sans 3', sans-serif;
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
+    transition: all 0.2s ease-out;
 }
 a {
     text-decoration: none;

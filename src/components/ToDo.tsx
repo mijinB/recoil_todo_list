@@ -24,6 +24,7 @@ const ToDoItemDelete = styled.button`
     border: none;
     border-radius: 50%;
     background-color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.bgColor};
     font-size: 14px;
     font-weight: 600;
     transition: all 0.25s ease-out;

@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-export let Categories: string[] = ["TO_DO", "DOING", "DONE"];
+export const initCategories: string[] = ["TO_DO", "DOING", "DONE"];
 
 export interface IToDo {
     id: number;
@@ -10,12 +10,12 @@ export interface IToDo {
 
 export const categoryState = atom<string>({
     key: "category",
-    default: Categories[0],
+    default: initCategories[0],
 });
 
 export const categoriesState = atom<string[]>({
     key: "categories",
-    default: Categories,
+    default: initCategories,
 });
 
 export const toDoState = atom<IToDo[]>({

@@ -66,7 +66,7 @@ const ToDoItemCategory = styled.button`
     }
 `;
 
-const Test = styled.span`
+const ToDoItemCategoryText = styled.span`
     width: 60px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -114,7 +114,7 @@ function ToDo({ id, text, category }: IToDo) {
                                     key={categories.indexOf(categoriesItem)}
                                     onClick={() => changeCategoryOnClick(categoriesItem)}
                                 >
-                                    <Test>{categoriesItem.replace("_", " ")}</Test>
+                                    <ToDoItemCategoryText>{categoriesItem.replace("_", " ")}</ToDoItemCategoryText>
                                 </ToDoItemCategory>
                             )
                     )}

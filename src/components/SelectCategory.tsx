@@ -1,5 +1,6 @@
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { categoriesState, categoryState } from "../atoms";
+import { useEffect } from "react";
 
 function SelectCategory() {
     const [categories, setCategories] = useRecoilState(categoriesState);
@@ -32,6 +33,10 @@ function SelectCategory() {
             setCategory(newCategory);
         }
     };
+
+    useEffect(() => {
+        localStorage.setItem("categories", JSON.stringify(categories));
+    }, [categories]);
 
     return (
         <>

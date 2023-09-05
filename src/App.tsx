@@ -72,7 +72,7 @@ li {
 `;
 
 function App() {
-    const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+    const [isDark, setIsDark] = useRecoilState<boolean>(isDarkAtom);
 
     /**@function toggleDarkAtom
      * 1. useSetRecoilState 함수를 이용해서 isDarkAtom 값 변경
@@ -82,6 +82,8 @@ function App() {
         setIsDark((prev) => !prev);
         localStorage.setItem("isdarkmode", `${!isDark}`);
     };
+
+    console.log(isDark);
 
     return (
         <>

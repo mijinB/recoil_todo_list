@@ -1,8 +1,8 @@
 import { atom, selector } from "recoil";
 
-export const isDarkAtom = atom({
+export const isDarkAtom = atom<boolean>({
     key: "isDark",
-    default: localStorage.getItem("isdarkmode") ?? false,
+    default: localStorage.getItem("isdarkmode") === "true" ? true : false,
 });
 
 export const initCategories: string[] = ["TO_DO", "DOING", "DONE"];

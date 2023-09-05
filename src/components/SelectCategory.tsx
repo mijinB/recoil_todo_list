@@ -1,10 +1,53 @@
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { categoriesState, categoryState } from "../atoms";
 import { useEffect } from "react";
+import { styled } from "styled-components";
+
+const CategoryButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background-color: ${(props) => props.theme.boxColor};
+    color: ${(props) => props.theme.textColor};
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    transition: background-color 0.25s ease-out;
+    cursor: pointer;
+    &:hover {
+        background-color: ${(props) => props.theme.accentBgColor};
+        color: ${(props) => props.theme.accentTextColor};
+    }
+    &:disabled {
+        border: 4px solid ${(props) => props.theme.accentTextColor};
+        background-color: ${(props) => props.theme.accentBgColor};
+        color: ${(props) => props.theme.accentTextColor};
+    }
+`;
+
+const CategoryAddButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background-color: ${(props) => props.theme.boxColor};
+    color: ${(props) => props.theme.accentTextColor};
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    transition: all 0.25s ease-out;
+    cursor: pointer;
+    &:hover {
+        background-color: ${(props) => props.theme.secondBoxColor};
+    }
+`;
 
 function SelectCategory() {
     const [categories, setCategories] = useRecoilState(categoriesState);
-    const setCategory = useSetRecoilState(categoryState);
+    const [category, setCategory] = useRecoilState(categoryState);
 
     /**@function showCategoryContent
      * 1. 클릭한 <button> category로 categoryState(atom) 값 변경해서 카테고리 이동
@@ -40,12 +83,17 @@ function SelectCategory() {
 
     return (
         <>
-            {categories.map((category) => (
-                <button key={categories.indexOf(category)} value={category} onClick={showCategoryContent}>
-                    {category.replace("_", " ")}
-                </button>
+            {categories.map((categoryItem) => (
+                <CategoryButton
+                    key={categories.indexOf(categoryItem)}
+                    value={categoryItem}
+                    disabled={categoryItem === category}
+                    onClick={showCategoryContent}
+                >
+                    {categoryItem.replace("_", " ")}
+                </CategoryButton>
             ))}
-            <button onClick={addCategory}>+Category</button>
+            <CategoryAddButton onClick={addCategory}>+Category</CategoryAddButton>
         </>
     );
 }

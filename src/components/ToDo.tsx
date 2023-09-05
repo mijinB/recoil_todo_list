@@ -1,5 +1,51 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IToDo, categoriesState, toDoState } from "../atoms";
+import { styled } from "styled-components";
+
+const ToDoItemWrapper = styled.li`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 75px;
+    margin: 15px 0;
+`;
+
+const ToDoItemText = styled.span`
+    color: ${(props) => props.theme.textColor};
+    font-size: 18px;
+`;
+
+const ToDoItemCategoryWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    height: 41px;
+`;
+
+const ToDoItemCategory = styled.button`
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0;
+    border: none;
+    background: none;
+    color: ${(props) => props.theme.accentTextColor};
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    &::before {
+        content: "";
+    }
+    &::after {
+        color: ${(props) => props.theme.textColor};
+        font-size: 15px;
+        cursor: default;
+        content: "|";
+    }
+    &:last-child::after {
+        content: "";
+    }
+`;
 
 function ToDo({ id, text, category }: IToDo) {
     const setToDos = useSetRecoilState(toDoState);
@@ -29,22 +75,28 @@ function ToDo({ id, text, category }: IToDo) {
     };
 
     return (
-        <li>
-            <span>{text}</span>
-            {categories.map(
-                (categoriesItem) =>
-                    category !== categoriesItem && (
-                        <button
-                            key={categories.indexOf(categoriesItem)}
-                            onClick={() => changeCategoryOnClick(categoriesItem)}
-                        >
-                            {categoriesItem.replace("_", " ")}
-                        </button>
-                    )
-            )}
-            <button onClick={onDelete}>✖</button>
+        <>
+            <ToDoItemWrapper>
+                <ToDoItemText>
+                    {text}
+                    <button onClick={onDelete}>✖</button>
+                </ToDoItemText>
+                <ToDoItemCategoryWrapper>
+                    {categories.map(
+                        (categoriesItem) =>
+                            category !== categoriesItem && (
+                                <ToDoItemCategory
+                                    key={categories.indexOf(categoriesItem)}
+                                    onClick={() => changeCategoryOnClick(categoriesItem)}
+                                >
+                                    {categoriesItem.replace("_", " ")}
+                                </ToDoItemCategory>
+                            )
+                    )}
+                </ToDoItemCategoryWrapper>
+            </ToDoItemWrapper>
             <hr />
-        </li>
+        </>
     );
 }
 

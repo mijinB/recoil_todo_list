@@ -30,9 +30,9 @@ const CategoryWrapper = styled.div`
     margin-bottom: 20px;
 `;
 
-const ToDoWrapper = styled.div`
+const ToDoListWrapper = styled.div`
     height: 500px;
-    padding: 20px;
+    padding: 5px 20px;
     border: 2px solid ${(props) => props.theme.textColor};
     border-radius: 10px;
     background-color: ${(props) => props.theme.boxColor};
@@ -51,11 +51,11 @@ function ToDoList() {
                 <SelectCategory />
             </CategoryWrapper>
             <CreateToDo />
-            <ToDoWrapper>
+            <ToDoListWrapper>
                 {toDos?.map((toDo) => (
                     <ToDo key={toDo.id} {...toDo} />
                 ))}
-            </ToDoWrapper>
+            </ToDoListWrapper>
         </Container>
     );
 }
